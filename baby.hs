@@ -35,3 +35,4 @@ charName :: Char -> String
 charName 'a' = "Albert"
 charName 'b' = "Broseph"
 charName 'c' = "Cecil"
+charName x = "No character name found!"
