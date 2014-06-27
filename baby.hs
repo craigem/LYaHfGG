@@ -98,4 +98,4 @@ bmiTell weight height
 	| bmi <= fat = "You're fat! Lose some weigh, fatty!"
 	| otherwise   = "You're a whale, congratulations!"
 	where bmi = weight / height ^ 2 
-          (skinny, normal, fat) = (18.5, 25.0, 30.0)
+		(skinny, normal, fat) = (18.5, 25.0, 30.0) {- this line is borken -}
