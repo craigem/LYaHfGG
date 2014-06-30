@@ -107,9 +107,11 @@ initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
 		(f:_) = firstname
 		(l:_) = lastname
 
+{- Rewitten using let below
 calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
 calcBmis xs = [bmi w h | (w, h) <- xs]  
     where bmi weight height = weight / height ^ 2  
+-}
 
 -- let it be
 
@@ -119,3 +121,7 @@ cylinder r h =
         topArea = pi * r ^2
     in sideArea + 2 * topArea
 
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
+calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
+
+-- Case Bindings
