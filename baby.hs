@@ -137,4 +137,15 @@ describeList xs = "This list is " ++ case xs of [] -> "empty."
                                                 [x] -> "a singleton list."
                                                 xs -> "a longer list."
 
--- Recursion
+-- 5. Recursion
+
+-- Maximum awesome
+
+maximum' :: (Ord a) => [a] -> a
+maximum' [] = error "maximum of emply list"
+maximum' [x] = x
+maximum' (x:xs)
+    | x > maxTail = x
+    | otherwise = maxTail
+    where maxTail = maximum' xs
+
