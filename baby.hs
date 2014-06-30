@@ -48,9 +48,11 @@ second :: (a, b, c) -> b
 second (_, y, _) = y
 third :: (a, b, c) -> c
 third (_, _, z) = z
+{- re-written below
 head' :: [a] -> a
 head' [] = error "Can't call head on an empty list, dummy!"
 head' (x:_) = x
+-}
 tell :: (Show a) => [a] -> String
 tell [] = "The list is empty"
 tell (x:[]) = "The list has one element: " ++ show x
@@ -124,4 +126,8 @@ cylinder r h =
 calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
 calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
 
--- Case Bindings
+-- Case expressions
+
+head' :: [a] -> a  
+head' xs = case xs of [] -> error "No head for empty lists!"  
+                      (x:_) -> x  
