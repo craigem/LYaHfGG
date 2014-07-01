@@ -187,3 +187,7 @@ quicksort (x:xs) =
     in  smallerSorted ++ [x] ++ biggerSorted
 
 -- 6. High order functions
+-- Curried functions
+
+multThree :: (Num a) => a -> a -> a -> a
+multThree x y z = x * y * z
