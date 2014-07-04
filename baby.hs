@@ -246,6 +246,14 @@ chain n
     | even n = n:chain (n `div` 2)
     | odd n = n:chain (n*3 + 1)
 
+{- Re-written below using lambdas
 numLongChains :: Int
 numLongChains = length (filter isLong (map chain [1..1900]))
     where isLong xs = length xs > 15
+-}
+
+-- Lambdas
+
+numLongChains :: Int
+numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
