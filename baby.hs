@@ -173,11 +173,13 @@ zip' _ [] = []
 zip' [] _ = []
 zip' (x:xs) (y:ys) = (x,y):zip' xs ys
 
+{- Re-written below
 elem' :: (Eq a) => a -> [a] -> Bool
 elem' a [] = False
 elem' a (x:xs)
     | a == x    = True
     | otherwise = a `elem'` xs
+-}
 
 -- Quick, sort!
 
@@ -223,9 +225,11 @@ flip' f =g
 
 -- Maps and filters
 
+{- Re-written below woth foldr
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
 map' f (x:xs) = f x : map' f xs
+-}
 
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
@@ -268,4 +272,7 @@ flip' f = \x y -> f y x
 -- Only folds and horses
 
 sum' :: (Num a) => [a] -> a
-sum' xs = foldl (+) 0
+sum' = foldl (+) 0 
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys
