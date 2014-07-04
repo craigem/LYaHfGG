@@ -130,9 +130,11 @@ calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
 
 -- Case expressions
 
+{- Re-written with folds
 head' :: [a] -> a  
 head' xs = case xs of [] -> error "No head for empty lists!"  
                       (x:_) -> x  
+-}
 
 describeList :: [a] -> String
 describeList xs = "This list is " ++ case xs of [] -> "empty."
@@ -143,10 +145,12 @@ describeList xs = "This list is " ++ case xs of [] -> "empty."
 
 -- Maximum awesome
 
+{- Re-written with folds
 maximum' :: (Ord a) => [a] -> a
 maximum' [] = error "maximum of empty list"
 maximum' [x] = x
 maximum' (x:xs) = max x (maximum' xs)
+-}
 
 -- A few more recursive functions
 
@@ -161,9 +165,11 @@ take' n _
 take' _ []     = []
 take' n (x:xs) = x : take' (n-1) xs
 
+{- Re-written with folds
 reverse' :: [a] -> [a]
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
+-}
 
 repeat' :: a -> [a]
 repeat' x = x:repeat' x
@@ -231,11 +237,13 @@ map' _ [] = []
 map' f (x:xs) = f x : map' f xs
 -}
 
+{- Re-written with folds
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
 filter' p (x:xs)
     | p x       = x : filter' p xs
     | otherwise = filter' p xs
+-}
 
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
@@ -279,3 +287,24 @@ elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys
 
 map' :: (a -> b) -> [a] -> [b]
 map' f xs = foldr (\x acc -> f x : acc) [] xs
+
+maximum' :: (Ord a) => [a] -> a
+maximum' = foldr1 (\x acc -> if x > acc then x else acc)
+
+reverse' :: [a] -> [a]
+reverse' = foldl (\acc x -> x : acc) []
+
+product' :: (Num a) => [a] -> a
+product' = foldr1 (*)
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' p = foldr (\x acc -> if p x then x : acc else acc) []
+
+head' :: [a] -> a
+head' = foldr1 (\x _ -> x)
+
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
