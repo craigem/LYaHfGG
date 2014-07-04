@@ -213,9 +213,11 @@ zipWith' _ [] _ = []
 zipWith' _ _ [] = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
+{- Re-written below
 flip' :: (a -> b -> c) -> b -> a -> c
 flip' f =g
     where g x y = f y x
+-}
 
 -- Maps and filters
 
@@ -257,3 +259,5 @@ numLongChains = length (filter isLong (map chain [1..1900]))
 numLongChains :: Int
 numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
 
+flip' :: (a -> b -> c) -> b -> a -> c
+flip' f = \x y -> f y x
