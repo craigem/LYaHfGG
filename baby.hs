@@ -63,9 +63,11 @@ length' :: (Num b) => [a] -> b
 length' [] = 0
 length' (_:xs) = 1 + length' xs
 -- Re-write sum using patterns
+{- Re-written below
 sum' :: (Num a) => [a] -> a
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
+-}
 -- Pattern shortcuts
 capital :: String -> String
 capital "" = "Empty string, whoops!"
@@ -261,3 +263,9 @@ numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
 
 flip' :: (a -> b -> c) -> b -> a -> c
 flip' f = \x y -> f y x
+
+
+-- Only folds and horses
+
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (+) 0
