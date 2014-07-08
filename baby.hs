@@ -279,6 +279,7 @@ flip' f = \x y -> f y x
 
 -- Only folds and horses
 
+-- Written in point free style
 sum' :: (Num a) => [a] -> a
 sum' = foldl (+) 0 
 
@@ -308,3 +309,14 @@ last' = foldl1 (\_ x -> x)
 
 sqrtSums :: Int
 sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+-- Function application with $
+
+-- Point free function composition
+fn = ceiling . negate . tan . cos . max 50
+
+oddSquareSum :: Integer
+oddSquareSum = 
+    let oddSquares = filter odd . map (^2) $ [1..]
+        belowLimit = takeWhile (<10000) oddSquares
+    in sum belowLimit
