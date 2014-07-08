@@ -1,3 +1,6 @@
+-- Module imports must be done before any functions are defined
+import Data.List
+
 doubleMe x = x + x
 doubleUS x y = doubleMe x + doubleMe y
 doubleSmallNumber x = if x > 100
@@ -320,3 +323,9 @@ oddSquareSum =
     let oddSquares = filter odd . map (^2) $ [1..]
         belowLimit = takeWhile (<10000) oddSquares
     in sum belowLimit
+
+--Modules
+-- Loading modules
+
+numUniques :: (Eq a) => [a] -> Int
+numUniques = length . nub
