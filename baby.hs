@@ -1,5 +1,6 @@
 -- Module imports must be done before any functions are defined
 import Data.List
+import Data.Char
 
 doubleMe x = x + x
 doubleUS x y = doubleMe x + doubleMe y
@@ -336,3 +337,11 @@ search :: (Eq a) => [a] -> [a] -> Bool
 search needle haystack =
     let nlen = length needle
     in foldl (\acc x -> if take nlen x == needle then True else acc) False (tails haystack)
+
+--Data.Char
+
+encode :: Int -> String -> String
+encode shift msg =
+    let ords = map ord msg
+        shifted = map (+ shift) ords
+    in map chr shifted
