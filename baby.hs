@@ -325,20 +325,20 @@ oddSquareSum =
         belowLimit = takeWhile (<10000) oddSquares
     in sum belowLimit
 
---Modules
+-- Modules
 -- Loading modules
 
 numUniques :: (Eq a) => [a] -> Int
 numUniques = length . nub
 
---Data.List
+-- Data.List
 
 search :: (Eq a) => [a] -> [a] -> Bool
 search needle haystack =
     let nlen = length needle
     in foldl (\acc x -> if take nlen x == needle then True else acc) False (tails haystack)
 
---Data.Char
+-- Data.Char
 
 encode :: Int -> String -> String
 encode shift msg =
@@ -348,3 +348,16 @@ encode shift msg =
 
 decode :: Int -> String -> String
 decode shift msg = encode (negate shift) msg
+
+-- Data.Map
+-- Association lists
+
+phoneBook =
+    [("betty","555-2938")
+    ,("bonnie","453-2928")
+    ,("patsy","493-2928")
+    ,("lucille","205-2928")
+    ,("wendy","939-8282")
+    ,("penny","853-2492")
+    ]
+
