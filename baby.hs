@@ -27,9 +27,6 @@ epicHilarity =
 -- Replaced later
 --length' xs = sum [1 | _ <- xs]
 
-removeNonUppercase :: [Char] -> [Char]
-removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
-
 triangles =
     [ (a,b,c) | c <- [1..10]
     , b <- [1..10]
@@ -49,13 +46,21 @@ rightTriangles' =
     , a+b+c == 24
     ]
 
+removeNonUppercase :: [Char] -> [Char]
+removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
+
 addThree :: Int -> Int -> Int -> Int
 addThree x y z = x + y + z
+
 -- Replaced later
 --factorial :: Integer -> Integer
 --factorial n = product [1..n]
+
+-- Float is a real floating point with single precision.
 circumference :: Float -> Float
 circumference r = 2 * pi * r
+
+-- Double is a real floating point with double the precision!
 circumference' :: Double -> Double
 circumference' r = 2 * pi * r
 
