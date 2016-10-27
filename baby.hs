@@ -4,17 +4,51 @@ import Data.Char
 import qualified Data.Map as Map
 
 doubleMe x = x + x
+
 doubleUS x y = doubleMe x + doubleMe y
+
 doubleSmallNumber x = if x > 100
-						then x
-						else x*2
+    then x
+    else x*2
+
 doubleSmallNumber' x = (if x > 100 then x else x*2) + 1
+
 conanO'Brien = "It's a-me, Conan O'Brien!"
+
 boomBangs xs = [ if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]
+
+nouns = ["hobo","frog","pope"]
+adjectives = ["lazy","grouchy","scheming"]
+epicHilarity =
+    [ adjective ++ " " ++ noun | adjective <- adjectives
+    , noun <- nouns
+    ]
+
 -- Replaced later
 --length' xs = sum [1 | _ <- xs]
+
 removeNonUppercase :: [Char] -> [Char]
 removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
+
+triangles =
+    [ (a,b,c) | c <- [1..10]
+    , b <- [1..10]
+    , a <- [1..10]
+    ]
+rightTriangles =
+    [ (a,b,c) | c <- [1..10]
+    , b <- [1..c]
+    , a <- [1..b]
+    , a^2 + b^2 == c^2
+    ]
+rightTriangles' =
+    [ (a,b,c) | c <- [1..10]
+    , b <- [1..c]
+    , a <- [1..b]
+    , a^2 + b^2 == c^2
+    , a+b+c == 24
+    ]
+
 addThree :: Int -> Int -> Int -> Int
 addThree x y z = x + y + z
 -- Replaced later
@@ -101,44 +135,44 @@ a `myCompare` b
 
 -- Where!?
 
-bmiTell :: (RealFloat a) => a -> a -> String  
-bmiTell weight height  
-    | bmi <= skinny = "You're underweight, you emo, you!"  
-    | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"  
-    | bmi <= fat    = "You're fat! Lose some weight, fatty!"  
-    | otherwise     = "You're a whale, congratulations!"  
-    where bmi = weight / height ^ 2  
+bmiTell :: (RealFloat a) => a -> a -> String
+bmiTell weight height
+    | bmi <= skinny = "You're underweight, you emo, you!"
+    | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"
+    | bmi <= fat    = "You're fat! Lose some weight, fatty!"
+    | otherwise     = "You're a whale, congratulations!"
+    where bmi = weight / height ^ 2
           (skinny, normal, fat) = (18.5, 25.0, 30.0)
 
 initials :: String -> String -> String
 initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
-	where 
+	where
 		(f:_) = firstname
 		(l:_) = lastname
 
 {- Rewitten using let below
-calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
-calcBmis xs = [bmi w h | (w, h) <- xs]  
-    where bmi weight height = weight / height ^ 2  
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight / height ^ 2
 -}
 
 -- let it be
 
 cylinder :: (RealFloat a) => a -> a -> a
-cylinder r h = 
+cylinder r h =
     let sideArea = 2 * pi * r * h
         topArea = pi * r ^2
     in sideArea + 2 * topArea
 
-calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
 calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
 
 -- Case expressions
 
 {- Re-written with folds
-head' :: [a] -> a  
-head' xs = case xs of [] -> error "No head for empty lists!"  
-                      (x:_) -> x  
+head' :: [a] -> a
+head' xs = case xs of [] -> error "No head for empty lists!"
+                      (x:_) -> x
 -}
 
 describeList :: [a] -> String
@@ -197,7 +231,7 @@ elem' a (x:xs)
 {- re-written using filter below
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
-quicksort (x:xs) = 
+quicksort (x:xs) =
     let smallerSorted = quicksort [a | a <- xs, a <= x]
         biggerSorted = quicksort [a | a <- xs, a > x]
     in  smallerSorted ++ [x] ++ biggerSorted
@@ -286,7 +320,7 @@ flip' f = \x y -> f y x
 
 -- Written in point free style
 sum' :: (Num a) => [a] -> a
-sum' = foldl (+) 0 
+sum' = foldl (+) 0
 
 elem' :: (Eq a) => a -> [a] -> Bool
 elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys
@@ -321,7 +355,7 @@ sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
 fn = ceiling . negate . tan . cos . max 50
 
 oddSquareSum :: Integer
-oddSquareSum = 
+oddSquareSum =
     let oddSquares = filter odd . map (^2) $ [1..]
         belowLimit = takeWhile (<10000) oddSquares
     in sum belowLimit
