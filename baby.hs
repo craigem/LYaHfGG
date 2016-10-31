@@ -255,6 +255,7 @@ quicksort (x:xs) =
     in  smallerSorted ++ [x] ++ biggerSorted
 -}
 
+
 -- 6. High order functions
 -- Curried functions
 
