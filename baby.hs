@@ -289,13 +289,13 @@ flip' f =g
 
 -- Maps and filters
 
-{- Re-written below woth foldr
+{- Re-written below with folds
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
 map' f (x:xs) = f x : map' f xs
 -}
 
-{- Re-written with folds
+{- Re-written below with folds
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
 filter' p (x:xs)
