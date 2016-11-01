@@ -2,6 +2,7 @@
 import Data.List
 import Data.Char
 import qualified Data.Map as Map
+import qualified Data.Set as Set
 
 doubleMe x = x + x
 
@@ -427,3 +428,8 @@ fromList' = foldr (\(k,v) acc -> Map.insert k v acc) Map.empty
 
 phoneBookToMap :: (Ord k) => [(k, a)] -> Map.Map k [a]
 phoneBookToMap xs = Map.fromListWith (++) $ map (\(k,v) -> (k,[v])) xs
+
+-- Data.Set
+
+text1 = "I just had an anime dream. Anime... Reality... Are they so different?"
+text2 = "The old man left his garbage can out and now his trash is all over my lawn!"
