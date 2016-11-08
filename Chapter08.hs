@@ -8,6 +8,7 @@ module Shapes
     , baseCircle
     , baseRect
     , Person(..)
+    , Maybe(..)
     ) where
 
 -- Define Shape
@@ -88,3 +89,25 @@ data Car = Car { company :: String
                , model :: String
                , year :: Int
                } deriving (Show)
+
+-- Type parameters
+
+-- Make a function that displays the car's properties in a nice little text
+tellCar :: Car -> String
+tellCar (Car {company = c, model = m, year = y}) =
+        "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
+
+-- Implement a 3D vector type and add some operations for it.
+-- Use a parameterized type because even though it will usually contain numeric
+-- types, it will still support several of them.
+
+data Vector a = Vector a a a deriving (Show)
+
+vplus :: (Num t) => Vector t -> Vector t -> Vector t
+(Vector i j k) `vplus` (Vector l m n) = Vector (i + l) (j + m) (k + n)
+
+vectMult :: (Num t) => Vector t -> t -> Vector t
+(Vector i j k) `vectMult` m = Vector (i * m) (j * m) (k * m)
+
+scalarMult :: (Num t) => Vector t -> Vector t -> t
+(Vector i j k) `scalarMult` (Vector l m n) = i * l + j * m + k * n
