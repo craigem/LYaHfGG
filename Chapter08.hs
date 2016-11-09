@@ -273,3 +273,16 @@ instance YesNo TrafficLight where
 -- values:
 yesnoIf :: (YesNo y) => y -> a -> a -> a
 yesnoIf yesnoVal yesResult noResult = if yesno yesnoVal then yesResult else noResult
+
+-- The Functor typeclass
+
+-- Look at fmap as if it were a function made only for Tree:
+instance Functor Tree where
+    fmap f EmptyTree = EmptyTree
+    fmap f (Node x leftsub rightsub) = Node (f x) (fmap f leftsub) (fmap f rightsub)
+
+-- partially apply Either by feeding it only one parameter so that it has one
+-- free parameter
+instance Functor (Either a) where
+    fmap f (Right x) = Right (f x)
+    fmap f (Left x) = Left x
