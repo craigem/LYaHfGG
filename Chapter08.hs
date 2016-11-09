@@ -176,3 +176,46 @@ lockers = Map.fromList
     ,(109,(Taken, "893JJ"))
     ,(110,(Taken, "99292"))
     ]
+
+-- Recursive data structures
+
+-- Use algebraic data types to implement our own list
+-- data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)
+
+-- define functions to be automatically infix by making them comprised of only
+-- special characters:
+infixr 5 :-:
+data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)
+
+-- Make a function that adds two of our lists together:
+infixr 5 .++
+(.++) :: List a -> List a -> List a
+Empty .++ ys = ys
+(x :-: xs) .++ ys = x :-: (xs .++ ys)
+
+
+-- a tree is either an empty tree or it's an element that contains some value
+-- and two trees. Perfect fit for an algebraic data type.
+data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show, Read, Eq)
+
+-- a utility function for making a singleton tree (a tree with just one node)
+-- and a function to insert an element into a tree:
+singleton :: a -> Tree a
+singleton x = Node x EmptyTree EmptyTree
+
+treeInsert :: (Ord a) => a -> Tree a -> Tree a
+treeInsert x EmptyTree = singleton x
+treeInsert x (Node a left right)
+    | x == a = Node x left right
+    | x < a = Node a (treeInsert x left) right
+    | x > a = Node a left (treeInsert x right)
+
+-- if the element we're looking for is smaller than the root node, check to see
+-- if it's in the left sub-tree. If it's bigger, check to see if it's in the right
+-- sub-tree:
+treeElem :: (Ord a) => a -> Tree a -> Bool
+treeElem x EmptyTree = False
+treeElem x (Node a left right)
+    | x == a = True
+    | x < a = treeElem x left
+    | x > a = treeElem x right
