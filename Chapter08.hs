@@ -219,3 +219,21 @@ treeElem x (Node a left right)
     | x == a = True
     | x < a = treeElem x left
     | x > a = treeElem x right
+
+-- Typeclasses 102
+
+-- Define the states of a traffic light.
+data TrafficLight = Red | Yellow | Green
+
+-- Implement as an instance of Eq:
+instance Eq TrafficLight where
+    Red == Red = True
+    Green == Green = True
+    Yellow == Yellow = True
+    _ == _ = False
+
+-- Implement as an instance of Show:
+instance Show TrafficLight where
+    show Red = "Red light"
+    show Yellow = "Yellow light"
+    show Green = "Green light"
