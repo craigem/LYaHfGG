@@ -1,5 +1,6 @@
 *.hi
 *.o
+capslocker
 fortune
 hello
 helloworld
