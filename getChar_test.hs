@@ -1,9 +1,10 @@
 -- getChar test from Chapter 09
 
+-- Import required modules
+import Control.Monad
+
 main = do
     c <- getChar
-    if c /= ' '
-        then do
-            putChar c
-            main
-        else return ()
+    when (c /= ' ') $ do
+        putChar c
+        main
