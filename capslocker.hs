@@ -1,10 +1,8 @@
 -- capslocker.hs from Chapter 09
 
 -- import required modules:
-import Control.Monad
 import Data.Char
 
-main = forever $ do
-    putStr "Give me some input: "
-    l <- getLine
-    putStrLn $ map toUpper l
+main = do
+    contents <- getContents
+    putStrLn (map toUpper contents)
