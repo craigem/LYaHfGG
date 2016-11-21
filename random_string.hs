@@ -1,5 +1,10 @@
+-- random_strings from Chapter 09
+
+-- import required modules
 import System.Random
 
 main = do
     gen <- getStdGen
-    putStr $ take 20 (randomRs ('a','z') gen)
+    putStrLn $ take 20 (randomRs ('a','z') gen)
+    gen' <- newStdGen
+    putStr $ take 20 (randomRs ('a','z') gen')
