@@ -1,6 +1,9 @@
 -- threeCoins from Chapter 09
 
-threeCoins :: StdGen -> (Bool. Bool, Bool)
+-- import required modules
+import System.Random
+
+threeCoins :: StdGen -> (Bool, Bool, Bool)
 threeCoins gen =
     let (firstCoin, newGen) = random gen
         (secondCoin, newGen') = random newGen
